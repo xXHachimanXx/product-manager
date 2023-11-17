@@ -26,3 +26,21 @@ func TestProductService_Get(t *testing.T) {
 	require.Nil(t, err)
 	require.Equal(t, product, result)
 }
+
+func TestProductService_Save(t *testing.T) {
+	controller := gomock.NewController(t)
+
+	defer controller.Finish()
+
+	product := mock_application.NewMockProductInterface(controller)
+	persistence := mock_application.NewMockProductPersistanceInterface(controller)
+
+	persistence.EXPECT().Save(gomock.Any()).Return(product, nil).AnyTimes()
+
+	service := application.ProductService{Persistence: persistence}
+	result, err := service.Create("nome", 1.4)
+
+	require.Nil(t, err)
+	require.Equal(t, product, result)
+
+}
