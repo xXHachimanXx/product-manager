@@ -32,7 +32,7 @@ func (p *ProductDb) Get(id string) (application.ProductInterface, error) {
 	return &product, nil
 }
 
-func (p *ProductDb) Create(product application.ProductInterface) (application.ProductInterface, error) {
+func (p *ProductDb) Save(product application.ProductInterface) (application.ProductInterface, error) {
 	var rows int
 	p.db.QueryRow("Select count(*) from product where id = ?", product.GetId()).Scan(&rows)
 

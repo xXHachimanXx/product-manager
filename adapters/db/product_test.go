@@ -65,14 +65,14 @@ func TestProductDb_Save(t *testing.T) {
 	product.Name = "Product Test"
 	product.Price = 10.5
 
-	productResult, err := productDb.Create(product)
+	productResult, err := productDb.Save(product)
 	require.Nil(t, err)
 	require.Equal(t, product.GetName(), productResult.GetName())
 	require.Equal(t, product.GetPrice(), productResult.GetPrice())
 	require.Equal(t, product.GetStatus(), productResult.GetStatus())
 
 	product.Status = "Enabled"
-	productResult, err = productDb.Create(product)
+	productResult, err = productDb.Save(product)
 	require.Nil(t, err)
 	require.Equal(t, product.GetName(), productResult.GetName())
 	require.Equal(t, product.GetPrice(), productResult.GetPrice())
