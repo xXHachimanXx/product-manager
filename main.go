@@ -9,9 +9,14 @@ import (
 )
 
 func main() {
-	db, _ := sql.Open("sqlite3", ":memory:")
+	db, _ := sql.Open("sqlite3", "db.sqlite3")
+	defer db.Close()
+
 	productDbAdapter := db2.NewProductDb(db)
 	productService := application.NewProductService(productDbAdapter)
 
-	productService.Create("Product example", 10.0)
+	product, _ := productService.Create("Product example", 10.0)
+
+	productService.Enable(product)
+
 }
