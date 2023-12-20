@@ -46,7 +46,7 @@ func createProduct(service application.ProductServiceInterface) http.Handler {
 		w.Header().Set("Content-Type", "application/json")
 
 		var productDTO dto.ProductDTO
-		err := json.NewDecoder(r.Body).Decode(productDTO)
+		err := json.NewDecoder(r.Body).Decode(&productDTO)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			w.Write(jsonError(err.Error()))
